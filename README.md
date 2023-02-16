@@ -25,3 +25,36 @@ Occurs on high load (xk6-kafka scripts on > 5 VUs).
 https://community.k6.io/t/the-flush-operation-took-higher-than-the-expected-set-push-interval/2469
 
 - [ ] Optimize data that is stored (in `tags`)
+
+
+
+
+sudo su -
+apt update -y
+
+apt-get install \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release -y
+    
+mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  
+  apt-get update
+  
+  sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin docker-compose -y
+  
+  apt install git -y
+  
+  git clone https://github.com/soulmaster179/k6-grafana-influxdb-jenkins && cd k6-grafana-influxdb-jenkins
+  
+  docker-compose up -d influxdb grafana jenkins
+  
+  
+  docker-compose run jenkins cat /var/jenkins_home/secrets/initialAdminPassword
+  
