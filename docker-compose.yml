@@ -34,6 +34,12 @@ services:
       - ./dashboards:/var/lib/grafana/dashboards
       - ./grafana-dashboard.yaml:/etc/grafana/provisioning/dashboards/dashboard.yaml
       - ./grafana-datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yaml
+      
+  reporter:
+    image: izakmarais/grafana-reporter:${gr_version:-latest}
+    command: "-ip grafana:3000"
+    ports:
+      - "8686:8686"
 
   k6:
     image: loadimpact/k6:latest
@@ -47,6 +53,7 @@ services:
       - K6_OUT=influxdb=http://influxdb:8086/k6
     volumes:
       - ./scripts:/scripts
+      
   jenkins:
     image: jenkins/jenkins:lts
     restart: unless-stopped
