@@ -53,7 +53,7 @@ echo \
   
   git clone https://github.com/soulmaster179/k6-grafana-influxdb-jenkins && cd k6-grafana-influxdb-jenkins
   
-  docker-compose up -d influxdb grafana jenkins reporter
+  docker-compose up -d influxdb grafana jenkins
   
   
   docker-compose run jenkins cat /var/jenkins_home/secrets/initialAdminPassword
@@ -70,7 +70,7 @@ After=docker.service
 Type=oneshot
 RemainAfterExit=yes
 WorkingDirectory=/home/loadtest101/k6-grafana-influxdb-jenkins
-ExecStart=docker-compose up -d influxdb grafana jenkins reporter
+ExecStart=docker-compose up -d influxdb grafana jenkins
 ExecStop=docker-compose down
 TimeoutStartSec=0
 
