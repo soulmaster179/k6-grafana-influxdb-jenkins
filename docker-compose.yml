@@ -6,7 +6,7 @@ networks:
 
 services:
   influxdb:
-    image: influxdb:1.8
+    image: influxdb:latest
 #    entrypoint: /bin/sh
 #    user: root
     networks:
@@ -34,12 +34,6 @@ services:
       - ./dashboards:/var/lib/grafana/dashboards
       - ./grafana-dashboard.yaml:/etc/grafana/provisioning/dashboards/dashboard.yaml
       - ./grafana-datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yaml
-      
-  reporter:
-    image: izakmarais/grafana-reporter:${gr_version:-latest}
-    command: "-ip grafana:3000"
-    ports:
-      - "8686:8686"
 
   k6:
     image: loadimpact/k6:latest
