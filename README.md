@@ -59,7 +59,7 @@ echo \
   docker-compose run jenkins cat /var/jenkins_home/secrets/initialAdminPassword
   
 
-# /etc/systemd/system/docker-compose-app.service
+/etc/systemd/system/docker-compose-app.service
 
 [Unit]
 Description=Docker Compose Application Service
@@ -69,9 +69,9 @@ After=docker.service
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-WorkingDirectory=/srv/docker
-ExecStart=/usr/local/bin/docker-compose up -d
-ExecStop=/usr/local/bin/docker-compose down
+WorkingDirectory=/home/loadtest101/k6-grafana-influxdb-jenkins
+ExecStart=docker-compose up -d influxdb grafana jenkins
+ExecStop=docker-compose down
 TimeoutStartSec=0
 
 [Install]
