@@ -61,6 +61,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - /usr/local/bin/docker:/usr/local/bin/docker
     sysctls:
-      net.ipv4.ip_local_port_range: 1024 65535
-      net.ipv4.tcp_tw_reuse: 10
-      net.ipv4.tcp_fin_timeout: 30
+      net.ipv4.ip_local_port_range: 9000 65535
+      net.ipv4.tcp_tw_reuse: 1
+      net.ipv4.tcp_fin_timeout: 10
