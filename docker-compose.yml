@@ -16,8 +16,6 @@ services:
       - "8086:8086"
     environment:
       - INFLUXDB_DB=k6
-    volumes:
-      - influxdb-volume:/var/lib/influxdb
 
   grafana:
     image: grafana/grafana:latest
@@ -32,18 +30,11 @@ services:
       - GF_AUTH_ANONYMOUS_ENABLED=true
       - GF_AUTH_BASIC_ENABLED=false
       - GF_SERVER_SERVE_FROM_SUB_PATH=true
-      - GF_INSTALL_PLUGINS=grafana-image-renderer
     volumes:
       - ./dashboards:/var/lib/grafana/dashboards
       - ./grafana-dashboard.yaml:/etc/grafana/provisioning/dashboards/dashboard.yaml
       - ./grafana-datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yaml
       
-  reporter:
-    image: izakmarais/grafana-reporter:${gr_version:-latest}
-    command: "-ip 172.16.1.101:3000"
-    ports:
-      - "8686:8686"
-
   k6:
     image: loadimpact/k6:latest
 #    entrypoint: /bin/sh
